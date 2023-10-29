@@ -1,9 +1,10 @@
 class Fighter {
-    constructor (fighterName, attackBonus, damageDice, critThreshold, maxHealthPoints, armourThreshold, resistBonus) {
+    constructor (fighterName, attackBonus, damageDice, damageBonus, critThreshold, maxHealthPoints, armourThreshold, resistBonus) {
         // Basic stats
-        this.fighterName = fighterName
+        this.fighterName = fighterName //str
         this.attackBonus = attackBonus // int
         this.damageDice = damageDice // array w/2 elems: #dice & dice value e.g. [2,4] for 2d4
+        this.damageBonus = damageBonus // int
         this.critThreshold = critThreshold // int (7,6 or 5)
         this.maxHealthPoints = maxHealthPoints // int
         this.currentHealthPoints = maxHealthPoints // int (hp should be at max when fighter is created)
