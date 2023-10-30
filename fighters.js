@@ -14,11 +14,11 @@ class Fighter {
         this.isBlinded = false // bool
         this.isStunned = false // bool
         this.isPoisoned = false // bool
-        // Debuffs from Conditions
-        this.attackBonusDebuff = 0 // non -ve int
-        this.damageDiceDebuff = 0 // non -ve int
-        this.critThresholdDebuff = 0 // non -ve int
-        this.armourThresholdDebuff = 0 // non -ve int
+        // Buffs/Debuffs from Conditions & Abilities
+        this.attackBonusBuff = 0 // int: +ve for buff & -ve for debuff
+        this.damageDiceBuff = 0 // int: +ve for buff & -ve for debuff
+        this.critThresholdBuff = 0 // int: +ve for buff & -ve for debuff
+        this.armourThresholdBuff = 0 // int: +ve for buff & -ve for debuff
         // Inventory: weapons & items
         this.currentWeapon = null // tbd how to handle this, probably import items & weapons into this module & set this variable to a weapon object
         this.itemList = []
@@ -57,14 +57,14 @@ class Fighter {
         ]
     }
 
-    resetConditionsAndDebuffs() {
+    resetConditionsAndBuffs() {
         this.isBlinded = false
         this.isStunned = false
         this.isPoisoned = false
-        this.attackBonusDebuff = 0
-        this.damageDiceDebuff = 0
-        this.critThresholdDebuff = 0
-        this.armourThresholdDebuff = 0
+        this.attackBonusBuff = 0
+        this.damageDiceBuff = 0
+        this.critThresholdBuff = 0
+        this.armourThresholdBuff = 0
     }
 
     resetAbilityAvailabilityIndicators() {
