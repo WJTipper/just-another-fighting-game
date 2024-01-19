@@ -3,6 +3,7 @@ const rollDice = require("./dice.js")
 /*
 Notes:
 while loop checking for valid action will go outside takeAction method inside the main battle method containing the structure for alternating turns
+add a conditionRecovery method that gets called at the start of every turn: chance for offensiveFighter to roll to break each condition they have, adding their recovery bonus, DC 5
 */
 
 let takeAction = (offensiveFighter, defensiveFighter, action) => {

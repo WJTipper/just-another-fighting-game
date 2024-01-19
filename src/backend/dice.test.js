@@ -1,6 +1,6 @@
 const rollDice = require("./dice.js")
 
-test ("test individual d1s", () => {
+it("test individual d1s", () => {
     let testRolls = []
 
     for (let i = 0; i < 100; i++) {
@@ -11,7 +11,7 @@ test ("test individual d1s", () => {
     expect(Math.max(...testRolls)).toBe(1)
 })
 
-test ("test individual d2s", () => {
+it("test individual d2s", () => {
     let testRolls = []
 
     for (let i = 0; i < 100; i++) {
@@ -22,7 +22,7 @@ test ("test individual d2s", () => {
     expect(Math.max(...testRolls)).toBeLessThanOrEqual(2)    
 })
 
-test ("test multiple d100s", () => {
+it("test multiple d100s", () => {
     let testRolls = []
 
     for (let i = 0; i < 100; i++) {

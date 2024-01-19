@@ -35,7 +35,7 @@ class Weapon {
             "Name: " + this.weaponName,
             "Type: " + this.weaponType,
             "Weight: " + this.weaponWeight,
-            "Damage: " + this.weaponDamageDice[0] + "d" + this.weaponDamageDice[1] + "+" + weaponDamageBonus,
+            "Damage: " + this.weaponDamageDice[0] + "d" + this.weaponDamageDice[1] + "+" + this.weaponDamageBonus,
             "Description: " + this.weaponDescription
         ]
     }
@@ -65,7 +65,7 @@ const lvlFourDagger = new Weapon("Flame Dagger", "Dagger", "Light", [4,4], 16, "
 const lvlFourSpear = new Weapon("Lightning Spear", "Spear", "Light", [4,4], 16, "placeholder-description")
 const lvlFourSword = new Weapon("Shadow Sword", "Sword", "Medium", [4,8], 8, "placeholder-description")
 const lvlFourStaff = new Weapon("Radiant Staff", "Staff", "Medium", [4,8], 8, "placeholder-description")
-const lvlFourWarhammer = new Weapon("Thunder Hammer", "Warhammer", "Heavy", [4,12], 0, "placeholder-description")
+const lvlFourWarhammer = new Weapon("Tempest Hammer", "Warhammer", "Heavy", [4,12], 0, "placeholder-description")
 const lvlFourGreataxe = new Weapon("Tsunami Greataxe", "Greataxe", "Heavy", [4,12], 0, "placeholder-description")
 const lvlFiveRapier = new Weapon("Forgotten Soul's Rapier", "Rapier", "Light", [5,4], 20, "placeholder-description")
 const lvlFiveDagger = new Weapon("Dagger of The Wandering Heart", "Dagger", "Light", [5,4], 20, "placeholder-description")
