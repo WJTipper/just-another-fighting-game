@@ -20,8 +20,8 @@ class Fighter {
         this.critThresholdBuff = 0 // int: +ve for buff & -ve for debuff
         this.armourThresholdBuff = 0 // int: +ve for buff & -ve for debuff
         // Inventory: weapons & items
-        this.currentWeapon = null // tbd how to handle this, probably import items & weapons into this module & set this variable to a weapon object
-        this.itemList = []
+        this.currentWeapon = null // Weapon object
+        this.itemList = [] // list containing Item objects
         // Abilities
         this.rallyingCry = false // bool
         this.perfectRecovery = false // bool
@@ -124,6 +124,28 @@ class Fighter {
         }
     }
 
+    boostStat(stat, value) {
+        switch(stat) {
+            case "attackBonus":
+                this.attackBonus += Number.parseInt(value)
+                break;
+            case "damageBonus":
+                this.damageBonus += Number.parseInt(value)
+                break;
+            case "maxHealthPoints":
+                this.maxHealthPoints += Number.parseInt(value)
+                break;
+            case "armourThreshold":
+                this.armourThreshold += Number.parseInt(value)
+                break;
+            case "resistBonus":
+                this.resistBonus += Number.parseInt(value)
+                break;
+            default:
+                break;
+        }
+    }
+
     setCondition(condition, isCondition) {
         switch(condition) {
             case "blinded":
@@ -157,8 +179,49 @@ class Fighter {
         }
     }
 
-    // functions needed: (& tests)
-    // setWeapon : call setStat for damage
-    // addItem : pop item name into list & call setStat or unlockAbility depending on item effect
-    // unlockAbility
+    setWeapon(weapon) {
+        // need to test if this implementation works, an alternative implementation is commented out below
+        this.currentWeapon = weapon
+        this.setStat("damageDice", weapon.weaponDamageDice)
+        this.setStat("damageBonus", weapon.weaponDamageBonus)
+        // this.damageDice = weapon.weaponDamageDice
+        // this.damageBonus = weapon.weaponDamageBonus
+    }
+
+    setAbility(ability, isAvailable) {
+        switch(ability) {
+            case "rallyingCry":
+                this.rallyingCry = isAvailable
+                break;
+            case "perfectRecovery":
+                this.perfectRecovery = isAvailable
+                break;
+            case "kidneyShot":
+                this.kidneyShot = isAvailable
+                break;
+            case "smokeBomb":
+                this.smokeBomb = isAvailable
+                break;
+            case "swiftStrike":
+                this.swiftStrike = isAvailable
+                break;
+            case "wildStrike":
+                this.wildStrike = isAvailable
+                break;
+            case "finishingStrike":
+                this.finishingStrike = isAvailable
+                break;
+            case "vampiricLeach":
+                this.vampiricLeach = isAvailable
+                break;
+            default:
+                break;
+        }
+    }
+
+    addItem(item) {
+        this.itemList.push(item)
+        this.boostStat(item.statBoostName, item.statBoostAmount)
+        this.setAbility(item.abilityUnlocked, true)
+    }
 }
