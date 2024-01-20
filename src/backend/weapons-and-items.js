@@ -83,3 +83,12 @@ const lvlSixStaff = new Weapon("Cherry Blossom", "Staff", "Medium", [6,8], 12, "
 const lvlSixWarhammer = new Weapon("Oakenfist", "Warhammer", "Heavy", [6,12], 0, "Never yield, no matter the odds.")
 const lvlSixHalberd = new Weapon("Giantsbane", "Halberd", "Heavy", [6,12], 0, "Cut them down to size.")
 const lvlSixGreataxe = new Weapon("Pestilence", "Greataxe", "Heavy", [6,12], 0, "Spread the rot.")
+
+module.exports = {
+    lvlOneDagger,lvlOneSpear,lvlOneSword,lvlOneStaff,lvlOneWarhammer,lvlOneGreataxe,
+    lvlTwoRapier,lvlTwoDagger,lvlTwoSword,lvlTwoMaul,lvlTwoHalberd,lvlTwoGreataxe,
+    lvlThreeRapier,lvlThreeSpear,lvlThreeFlail,lvlThreeStaff,lvlThreeWarhammer,lvlThreeHalberd,
+    lvlFourDagger,lvlFourSpear,lvlFourSword,lvlFourStaff,lvlFourWarhammer,lvlFourGreataxe,
+    lvlFiveRapier,lvlFiveDagger,lvlFiveFlail,lvlFiveMaul,lvlFiveHalberd,lvlFiveGreataxe,
+    lvlSixDagger,lvlSixSpear,lvlSixRapier,lvlSixSword,lvlSixMaul,lvlSixFlail,lvlSixStaff,lvlSixWarhammer,lvlSixHalberd,lvlSixGreataxe
+}

@@ -57,6 +57,13 @@ class Fighter {
         ]
     }
 
+    getFighterInventory() {
+        return [
+            "Current Weapon: " + this.currentWeapon,
+            "Items: " + this.itemList
+        ]
+    }
+
     resetConditionsAndBuffs() {
         this.isBlinded = false
         this.isStunned = false
@@ -79,11 +86,79 @@ class Fighter {
         this.vampiricLeachIsAvailable = this.vampiricLeach
     }
 
+    setStat(stat, value) {
+        switch(stat) {
+            case "fighterName":
+                this.fighterName = value.toString()
+                break;
+            case "attackBonus":
+                this.attackBonus = Number.parseInt(value)
+                break;
+            case "damageDice":
+                this.damageDice = value
+                break;
+            case "damageBonus":
+                this.damageBonus = Number.parseInt(value)
+                break;
+            case "critThreshold":
+                if (Number.parseInt(value) >= 5 && Number.parseInt(value) <= 7) {
+                    this.critThreshold = Number.parseInt(value)
+                }
+                break;
+            case "maxHealthPoints":
+                this.maxHealthPoints = Number.parseInt(value)
+                break;
+            case "currentHealthPoints":
+                this.currentHealthPoints = Number.parseInt(value)
+                break;
+            case "armourThreshold":
+                if (Number.parseInt(value) >= 2 && Number.parseInt(value) <= 5) {
+                    this.armourThreshold = Number.parseInt(value)
+                }
+                break;
+            case "resistBonus":
+                this.resistBonus = Number.parseInt(value)
+                break;
+            default:
+                break;
+        }
+    }
+
+    setCondition(condition, isCondition) {
+        switch(condition) {
+            case "blinded":
+                this.isBlinded = isCondition
+                if (isCondition) {
+                    this.attackBonusBuff = -1
+                    this.critThresholdBuff = 10
+                } else {
+                    this.attackBonusBuff = 0
+                    this.critThresholdBuff = 0
+                }
+                break;
+            case "stunned":
+                this.isStunned = isCondition
+                if (isCondition) {
+                    this.armourThresholdBuff = -1
+                } else {
+                    this.armourThresholdBuff = 0
+                }
+                break;
+            case "poisoned":
+                this.isPoisoned = isCondition
+                if (isCondition) {
+                    this.damageDiceBuff = -1
+                } else {
+                    this.damageDiceBuff = 0
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     // functions needed: (& tests)
-    // getFighterInventory: lists names of weapon & items
-    // setStat
     // setWeapon : call setStat for damage
-    // setConditionAndDebuff : use this for adding & removing conditions & the associated debuff
     // addItem : pop item name into list & call setStat or unlockAbility depending on item effect
     // unlockAbility
 }
