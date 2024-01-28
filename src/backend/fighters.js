@@ -30,7 +30,6 @@ class Fighter {
         this.smokeBomb = false // bool
         this.swiftStrike = false // bool
         this.wildStrike = false // bool
-        this.finishingStrike = false // bool
         this.vampiricLeach = false // bool
         // Ability availability indicators
         this.rallyingCryIsAvailable = false // bool
@@ -40,7 +39,6 @@ class Fighter {
         this.smokeBombIsAvailable = false // bool
         this.swiftStrikeIsAvailable = false // bool
         this.wildStrikeIsAvailable = false // bool
-        this.finishingStrikeIsAvailable = false // bool
         this.vampiricLeachIsAvailable = false // bool
     }
 
@@ -82,7 +80,6 @@ class Fighter {
         this.smokeBombIsAvailable = this.smokeBomb
         this.swiftStrikeIsAvailable = this.swiftStrike
         this.wildStrikeIsAvailable = this.wildStrike
-        this.finishingStrikeIsAvailable = this.finishingStrike
         this.vampiricLeachIsAvailable = this.vampiricLeach
     }
 
@@ -207,9 +204,6 @@ class Fighter {
                 break;
             case "wildStrike":
                 this.wildStrike = isAvailable
-                break;
-            case "finishingStrike":
-                this.finishingStrike = isAvailable
                 break;
             case "vampiricLeach":
                 this.vampiricLeach = isAvailable
