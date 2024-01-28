@@ -119,14 +119,57 @@ let takeAction = (offensiveFighter, defensiveFighter, action) => {
             }
             break
 
-
         // Modified Attack Actions
-        // swiftStrike,wildStrike,finishingStrike
-
+        case "swiftStrike":
+            actionOutcome.actionChosen = "Swift Strike"
+            if (offensiveFighter.swiftStrike !== true) {
+                actionIsValid = false
+                invalidActionMessage = "Swift Strike not unlocked."
+            } else if (offensiveFighter.swiftStrikeIsAvailable !== true) {
+                actionIsValid = false
+                invalidActionMessage = "Swift Strike not available, ability has been used."
+            } else {
+                offensiveFighter.armourThresholdBuff -= 2
+                const swiftStrikeAttack1 = takeAction(offensiveFighter, defensiveFighter, "attack")
+                const swiftStrikeAttack2 = takeAction(offensiveFighter, defensiveFighter, "attack")
+                const swiftStrikeAttack3 = takeAction(offensiveFighter, defensiveFighter, "attack")
+                // set properties of actionOutcome properly here using 3 separate attacks
+            }
+            break
+        case "wildStrike":
+            actionOutcome.actionChosen = "Wild Strike"
+            if (offensiveFighter.wildStrike !== true) {
+                actionIsValid = false
+                invalidActionMessage = "Wild Strike not unlocked."
+            } else if (offensiveFighter.wildStrikeIsAvailable !== true) {
+                actionIsValid = false
+                invalidActionMessage = "Wild Strike not available, ability has been used."
+            } else {
+                offensiveFighter.attackBonusBuff -= 1
+                offensiveFighter.damageDiceBuff += 2 * offensiveFighter.damageDice[0]
+                const wildStrikeAttack = takeAction(offensiveFighter, defensiveFighter, "attack")
+                offensiveFighter.attackBonusBuff += 1
+                offensiveFighter.damageDiceBuff -= 2 * offensiveFighter.damageDice[0]
+                // set properties of actionOutcome properly here using wildStrikeAttack
+            }
+            break
 
         // Steal HP
-        // vampiricLeach
-
+        case "vampiricLeach":
+            actionOutcome.actionChosen = "Vampiric Leach"
+            if (offensiveFighter.vampiricLeach !== true) {
+                actionIsValid = false
+                invalidActionMessage = "Vampiric Leach not unlocked."
+            } else if (offensiveFighter.vampiricLeachIsAvailable !== true) {
+                actionIsValid = false
+                invalidActionMessage = "Vampiric Leach not available, ability has been used."
+            } else {
+                let healthStolen = rollDice(offensiveFighter.damageDice[0] + offensiveFighter.damageDiceBuff, offensiveFighter.damageDice[1])
+                defensiveFighter.currentHealthPoints -= healthStolen
+                offensiveFighter.currentHealthPoints += healthStolen
+                // set properties of actionOutcome properly here
+            }
+            break
 
         // Unknown/Invalid Action
         default:
