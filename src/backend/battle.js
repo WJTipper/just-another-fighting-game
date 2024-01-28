@@ -25,11 +25,11 @@ let takeAction = (offensiveFighter, defensiveFighter, action) => {
             actionOutcome.actionChosen = "Attack"
             let attackRoll = rollDice(1,6)
             let damageRoll = 0
-            if (attackRoll >= offensiveFighter.critThreshold) {
-                damageRoll = rollDice(offensiveFighter.damageDice[0] * 2, offensiveFighter.damageDice[1]) + offensiveFighter.damageBonus
+            if (attackRoll >= offensiveFighter.critThreshold + offensiveFighter.critThresholdBuff) {
+                damageRoll = rollDice(2 * (offensiveFighter.damageDice[0] + offensiveFighter.damageDiceBuff), offensiveFighter.damageDice[1]) + offensiveFighter.damageBonus
                 actionOutcome.outcomeText = "Critical Hit."
-            } else if (attackRoll + offensiveFighter.attackBonus >= defensiveFighter.armourThreshold) {
-                damageRoll = rollDice(offensiveFighter.damageDice[0], offensiveFighter.damageDice[1]) + offensiveFighter.damageBonus
+            } else if (attackRoll + offensiveFighter.attackBonus + offensiveFighter.attackBonusBuff >= defensiveFighter.armourThreshold + defensiveFighter.armourThresholdBuff) {
+                damageRoll = rollDice(offensiveFighter.damageDice[0] + offensiveFighter.damageDiceBuff, offensiveFighter.damageDice[1]) + offensiveFighter.damageBonus
                 actionOutcome.outcomeText = "Hit."
             } else {
                 actionOutcome.outcomeText = "Miss."
@@ -84,8 +84,8 @@ let takeAction = (offensiveFighter, defensiveFighter, action) => {
             } else {
                 offensiveFighter.kidneyShotIsAvailable = false
                 defensiveFighter.setCondition("stunned", true)
-                const extraAttack = takeAction(offensiveFighter, defensiveFighter, "attack")
-                actionOutcome.outcomeText = "Stunned condition inflicted. " + extraAttack[2].outcomeText
+                const kidneyShotAttack = takeAction(offensiveFighter, defensiveFighter, "attack")
+                actionOutcome.outcomeText = "Stunned condition inflicted. " + kidneyShotAttack[2].outcomeText
             }
             break
         case "smokeBomb":
@@ -99,8 +99,8 @@ let takeAction = (offensiveFighter, defensiveFighter, action) => {
             } else {
                 offensiveFighter.smokeBombIsAvailable = false
                 defensiveFighter.setCondition("blinded", true)
-                const extraAttack = takeAction(offensiveFighter, defensiveFighter, "attack")
-                actionOutcome.outcomeText = "Blinded condition inflicted. " + extraAttack[2].outcomeText
+                const smokeBombAttack = takeAction(offensiveFighter, defensiveFighter, "attack")
+                actionOutcome.outcomeText = "Blinded condition inflicted. " + smokeBombAttack[2].outcomeText
             }
             break
         case "venomStrike":
@@ -114,8 +114,8 @@ let takeAction = (offensiveFighter, defensiveFighter, action) => {
             } else {
                 offensiveFighter.venomStrikeIsAvailable = false
                 defensiveFighter.setCondition("poisoned", true)
-                const extraAttack = takeAction(offensiveFighter, defensiveFighter, "attack")
-                actionOutcome.outcomeText = "Poisoned condition inflicted. " + extraAttack[2].outcomeText
+                const venomStrikeAttack = takeAction(offensiveFighter, defensiveFighter, "attack")
+                actionOutcome.outcomeText = "Poisoned condition inflicted. " + venomStrikeAttack[2].outcomeText
             }
             break
 
