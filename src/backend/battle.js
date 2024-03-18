@@ -82,10 +82,16 @@ let takeAction = (offensiveFighter, defensiveFighter, action) => {
                 actionIsValid = false
                 invalidActionMessage = "Kidney Shot not available, ability has been used."
             } else {
-                offensiveFighter.kidneyShotIsAvailable = false
-                defensiveFighter.setCondition("stunned", true)
                 const kidneyShotAttack = takeAction(offensiveFighter, defensiveFighter, "attack")
-                actionOutcome.outcomeText = "Stunned condition inflicted. " + kidneyShotAttack[2].outcomeText
+                actionOutcome.attackRoll = kidneyShotAttack[2].attackRoll
+                actionOutcome.damageRoll = kidneyShotAttack[2].damageRoll
+                actionOutcome.outcomeText = kidneyShotAttack[2].outcomeText
+                if (kidneyShotAttack[2].outcomeText !== "Miss!") {
+                    offensiveFighter.kidneyShotIsAvailable = false
+                    defensiveFighter.setCondition("stunned", true)
+                    actionOutcome.outcomeText = "Stunned condition inflicted. " + kidneyShotAttack[2].outcomeText
+                    actionOutcome.conditionInflicted = "Stunned"
+                }
             }
             break
         case "smokeBomb":
@@ -97,10 +103,16 @@ let takeAction = (offensiveFighter, defensiveFighter, action) => {
                 actionIsValid = false
                 invalidActionMessage = "Smoke Bomb not available, ability has been used."
             } else {
-                offensiveFighter.smokeBombIsAvailable = false
-                defensiveFighter.setCondition("blinded", true)
                 const smokeBombAttack = takeAction(offensiveFighter, defensiveFighter, "attack")
-                actionOutcome.outcomeText = "Blinded condition inflicted. " + smokeBombAttack[2].outcomeText
+                actionOutcome.attackRoll = smokeBombAttack[2].attackRoll
+                actionOutcome.damageRoll = smokeBombAttack[2].damageRoll
+                actionOutcome.outcomeText = smokeBombAttack[2].outcomeText
+                if (smokeBombAttack[2].outcomeText !== "Miss!") {
+                    offensiveFighter.smokeBombIsAvailable = false
+                    defensiveFighter.setCondition("blinded", true)
+                    actionOutcome.outcomeText = "Blinded condition inflicted. " + smokeBombAttack[2].outcomeText
+                    actionOutcome.conditionInflicted = "Blinded"
+                }
             }
             break
         case "venomStrike":
@@ -112,10 +124,16 @@ let takeAction = (offensiveFighter, defensiveFighter, action) => {
                 actionIsValid = false
                 invalidActionMessage = "Venom Strike not available, ability has been used."
             } else {
-                offensiveFighter.venomStrikeIsAvailable = false
-                defensiveFighter.setCondition("poisoned", true)
                 const venomStrikeAttack = takeAction(offensiveFighter, defensiveFighter, "attack")
-                actionOutcome.outcomeText = "Poisoned condition inflicted. " + venomStrikeAttack[2].outcomeText
+                actionOutcome.attackRoll = venomStrikeAttack[2].attackRoll
+                actionOutcome.damageRoll = venomStrikeAttack[2].damageRoll
+                actionOutcome.outcomeText = venomStrikeAttack[2].outcomeText
+                if (venomStrikeAttack[2].outcomeText !== "Miss!") {
+                    offensiveFighter.venomStrikeIsAvailable = false
+                    defensiveFighter.setCondition("poisoned", true)
+                    actionOutcome.outcomeText = "Poisoned condition inflicted. " + venomStrikeAttack[2].outcomeText
+                    actionOutcome.conditionInflicted = "Poisoned"
+                }
             }
             break
 
@@ -133,7 +151,10 @@ let takeAction = (offensiveFighter, defensiveFighter, action) => {
                 const swiftStrikeAttack1 = takeAction(offensiveFighter, defensiveFighter, "attack")
                 const swiftStrikeAttack2 = takeAction(offensiveFighter, defensiveFighter, "attack")
                 const swiftStrikeAttack3 = takeAction(offensiveFighter, defensiveFighter, "attack")
-                // set properties of actionOutcome properly here using 3 separate attacks
+                // not sure yet how to format actionOutcome.attackRoll: leave as 0 / array of all 3 rolls / string of all 3 rolls?
+                actionOutcome.attackRoll = 999
+                actionOutcome.damageRoll = swiftStrikeAttack1[2].damageRoll + swiftStrikeAttack2[2].damageRoll + swiftStrikeAttack3[2].damageRoll
+                actionOutcome.outcomeText = swiftStrikeAttack1[2].outcomeText + " " + swiftStrikeAttack2[2].outcomeText + " " + swiftStrikeAttack3[2].outcomeText
             }
             break
         case "wildStrike":
@@ -150,7 +171,12 @@ let takeAction = (offensiveFighter, defensiveFighter, action) => {
                 const wildStrikeAttack = takeAction(offensiveFighter, defensiveFighter, "attack")
                 offensiveFighter.attackBonusBuff += 1
                 offensiveFighter.damageDiceBuff -= 2 * offensiveFighter.damageDice[0]
-                // set properties of actionOutcome properly here using wildStrikeAttack
+                actionOutcome.attackRoll = wildStrikeAttack[2].attackRoll
+                actionOutcome.damageRoll = wildStrikeAttack[2].damageRoll
+                actionOutcome.outcomeText = wildStrikeAttack[2].outcomeText
+                if (wildStrikeAttack[2].outcomeText !== "Miss!") {
+                    offensiveFighter.wildStrikeIsAvailable = false
+                }
             }
             break
 
@@ -167,7 +193,7 @@ let takeAction = (offensiveFighter, defensiveFighter, action) => {
                 let healthStolen = rollDice(offensiveFighter.damageDice[0] + offensiveFighter.damageDiceBuff, offensiveFighter.damageDice[1])
                 defensiveFighter.currentHealthPoints -= healthStolen
                 offensiveFighter.currentHealthPoints += healthStolen
-                // set properties of actionOutcome properly here
+                actionOutcome.hpStolen = healthStolen
             }
             break
 
