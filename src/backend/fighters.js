@@ -148,27 +148,27 @@ class Fighter {
             case "blinded":
                 this.isBlinded = isCondition
                 if (isCondition) {
-                    this.attackBonusBuff = -1
-                    this.critThresholdBuff = 10
+                    this.attackBonusBuff -= 1
+                    this.critThresholdBuff += 10
                 } else {
-                    this.attackBonusBuff = 0
-                    this.critThresholdBuff = 0
+                    this.attackBonusBuff += 1
+                    this.critThresholdBuff -= 10
                 }
                 break;
             case "stunned":
                 this.isStunned = isCondition
                 if (isCondition) {
-                    this.armourThresholdBuff = -1
+                    this.armourThresholdBuff -= 1
                 } else {
-                    this.armourThresholdBuff = 0
+                    this.armourThresholdBuff += 1
                 }
                 break;
             case "poisoned":
                 this.isPoisoned = isCondition
                 if (isCondition) {
-                    this.damageDiceBuff = -1
+                    this.damageDiceBuff -= 1
                 } else {
-                    this.damageDiceBuff = 0
+                    this.damageDiceBuff += 1
                 }
                 break;
             default:
